@@ -20,6 +20,7 @@ export const getFileState = async (req, res) => {
 export const getFilesStates = async (req, res) => {
 	try {
 		const [rows] = await pool.query("SELECT * FROM file_state");
+		res.set('Access-Control-Allow-Origin', '*');
 		res.json(rows);
 	} catch (error) {
 		return res.status(500).json({ message: "Something goes wrong" })

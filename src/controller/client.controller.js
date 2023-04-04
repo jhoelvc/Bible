@@ -4,6 +4,7 @@ import { pool } from "../db.js";
 export const getClients = async (req, res) => {
 	try {
 	  const [rows] = await pool.query("SELECT * FROM client");
+	  res.set('Access-Control-Allow-Origin', '*');
 	  res.json(rows);
 	} catch (error) {
 	  return res.status(500).json({ message: "Something goes wrong", error });

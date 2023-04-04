@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import itemsRoutes from './routes/items.routes.js';
 import languagesRoutes from './routes/languages.routes.js'
 import serviceTypeRoutes from './routes/service_type.routes.js'
@@ -10,8 +11,10 @@ import packageRoutes from './routes/package.routes.js'
 import providerRoutes from './routes/provider.routes.js'
 import serviceRoutes from './routes/service.routes.js'
 
+//const cors = require('cors')
 const app = express();
 
+app.use(cors())
 app.use(express.json())
 app.use(itemsRoutes)
 app.use(languagesRoutes)
