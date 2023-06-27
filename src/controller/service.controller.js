@@ -1,9 +1,8 @@
 import { pool } from "../db.js";
 
-
 export const getServices = async (req, res) => {
 	try {
-	  const [rows] = await pool.query("SELECT * FROM service");
+	  const [rows] = await pool.query("SELECT s.code, s.name AS name, st.name AS service_type FROM service s INNER JOIN service_type st ON s.service_type_code = st.code");
 	  res.json(rows);
 	} catch (error) {
 	  return res.status(500).json({ message: "Something goes wrong", error });
