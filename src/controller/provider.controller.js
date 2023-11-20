@@ -3,7 +3,7 @@ import { pool } from "../db.js";
 
 export const getProviders = async (req, res) => {
 	try {
-	  const [rows] = await pool.query(`SELECT p.code, p.name, idt.name AS type_document, p.id_number, p.identity_document_type_code FROM provider p INNER JOIN identity_document_type idt ON p.identity_document_type_code = idt.code`);
+	  const [rows] = await pool.query(`SELECT p.code, p.name, idt.name AS identity_document_type_name, p.id_number, p.identity_document_type_code FROM provider p INNER JOIN identity_document_type idt ON p.identity_document_type_code = idt.code`);
 	  res.json(rows);
 	} catch (error) {
 	  return res.status(500).json({ message: "Something goes wrong", error });

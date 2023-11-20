@@ -1,8 +1,8 @@
 USE db_bible;
 
-INSERT INTO languages(name) VALUES ('Castellano'), ('Ingles');
+INSERT INTO language(name) VALUES ('Castellano'), ('Ingles');
 INSERT INTO service_type(name) VALUES ('Transporte'), ('Guiado'), ('Hoteleria'), ('Restaurante');
-INSERT INTO items(name, price) VALUES ('Boleto turistico valle sagrado', 0), 
+INSERT INTO item(name, price) VALUES ('Boleto turistico valle sagrado', 0), 
 ('Boleto turistico valle sur', 0), 
 ('Boleto de tren', 0), 
 ('Entrada Machupicchu', 0);
