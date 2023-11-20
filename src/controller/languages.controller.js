@@ -2,7 +2,7 @@ import { pool } from "../db.js";
 
 export const getLanguages = async (req, res) => {
 	try {
-	  const [rows] = await pool.query("SELECT * FROM languages");
+	  const [rows] = await pool.query("SELECT * FROM language");
 	  res.json(rows);
 	} catch (error) {
 	  return res.status(500).json({ message: "Something goes wrong", error });
@@ -12,7 +12,7 @@ export const getLanguages = async (req, res) => {
  export const getLanguage = async (req, res) => {
 	try {
 	  const { code } = req.params;
-	  const [rows] = await pool.query("SELECT * FROM languages WHERE code = ?", [
+	  const [rows] = await pool.query("SELECT * FROM language WHERE code = ?", [
 		 code
 	  ]);
  
@@ -29,7 +29,7 @@ export const getLanguages = async (req, res) => {
  export const deleteLanguage = async (req, res) => {
 	try {
 	  const { code } = req.params;
-	  const [rows] = await pool.query("DELETE FROM languages WHERE code = ?", [code]);
+	  const [rows] = await pool.query("DELETE FROM language WHERE code = ?", [code]);
  
 	  if (rows.affectedRows <= 0) {
 		 return res.status(404).json({ message: "Language not found" });
@@ -45,7 +45,7 @@ export const getLanguages = async (req, res) => {
 	try {
 	  const { name } = req.body;
 	  const [rows] = await pool.query(
-		 "INSERT INTO languages (name) VALUES (?)",
+		 "INSERT INTO language (name) VALUES (?)",
 		 [name]
 	  );
 
@@ -61,14 +61,14 @@ export const getLanguages = async (req, res) => {
 		const { name } = req.body;
 		
 		const [result] = await pool.query(
-			"UPDATE languages SET name = IFNULL(?, name) WHERE code = ?",
+			"UPDATE language SET name = IFNULL(?, name) WHERE code = ?",
 			[name, code]
 		);
 
 		if (result.affectedRows === 0)
 			return res.status(404).json({ message: "Language not found", error });
 
-		const [rows] = await pool.query("SELECT * FROM languages WHERE code = ?", [
+		const [rows] = await pool.query("SELECT * FROM language WHERE code = ?", [
 			code
 		]);
  

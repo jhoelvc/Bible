@@ -44,13 +44,13 @@ export const getPackages = async (req, res) => {
  
  export const createPackage = async (req, res) => {
 	try {
-	  const { client_code, languages_code, name } = req.body;
+	  const { name } = req.body;
 	  const [rows] = await pool.query(
-		 "INSERT INTO package (client_code, languages_code, name) VALUES (?, ?, ?)",
-		 [client_code, languages_code, name]
+		 "INSERT INTO package (name) VALUES (?)",
+		 [name]
 	  );
 
-	  res.status(201).json({ code: rows.insertId, client_code, languages_code, name });
+	  res.status(201).json({ code: rows.insertId, name });
 	} catch (error) {
 	  return res.status(500).json({ message: "Something goes wrong", error });
 	}
@@ -59,11 +59,11 @@ export const getPackages = async (req, res) => {
  export const updatePackage = async (req, res) => {
 	try {
 		const { code } = req.params;
-		const { client_code, languages_code, name } = req.body;
+		const { name } = req.body;
 		
 		const [result] = await pool.query(
-			"UPDATE package SET client_code = IFNULL(?, client_code), languages_code = IFNULL(?, languages_code), name = IFNULL(?, name) WHERE code = ?",
-			[client_code, languages_code, name]
+			"UPDATE package SET name = IFNULL(?, name) WHERE code = ?",
+			[name]
 		);
 
 		if (result.affectedRows === 0)

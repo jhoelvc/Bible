@@ -45,13 +45,13 @@ export const getClients = async (req, res) => {
  
  export const createClient = async (req, res) => {
 	try {
-	  const { firt_name, last_name, id_number, identity_document_type_code } = req.body;
+	  const { name, id_number, identity_document_type_code } = req.body;
 	  const [rows] = await pool.query(
-		 "INSERT INTO client (firt_name, last_name, id_number, identity_document_type_code) VALUES (?, ?, ?, ?)",
-		 [firt_name, last_name, id_number, identity_document_type_code]
+		 "INSERT INTO client (name, id_number, identity_document_type_code) VALUES (?, ?, ?, ?)",
+		 [name, id_number, identity_document_type_code]
 	  );
 
-	  res.status(201).json({ code: rows.insertId, file_state_code, name });
+	  res.status(201).json({ code: rows.insertId, name, id_number, identity_document_type_code });
 	} catch (error) {
 	  return res.status(500).json({ message: "Something goes wrong", error });
 	}
@@ -60,11 +60,11 @@ export const getClients = async (req, res) => {
  export const updateClient = async (req, res) => {
 	try {
 		const { code } = req.params;
-		const { firt_name, last_name, id_number, identity_document_type_code } = req.body;
+		const { name, id_number, identity_document_type_code } = req.body;
 		
 		const [result] = await pool.query(
-			"UPDATE client SET firt_name = IFNULL(?, firt_name), last_name = IFNULL(?, last_name), id_number = IFNULL(?, id_number), identity_document_type_code = IFNULL(?, identity_document_type_code) WHERE code = ?",
-			[firt_name, last_name, id_number, identity_document_type_code]
+			"UPDATE client SET name = IFNULL(?, name), id_number = IFNULL(?, id_number), identity_document_type_code = IFNULL(?, identity_document_type_code) WHERE code = ?",
+			[name, id_number, identity_document_type_code]
 		);
 
 		if (result.affectedRows === 0)

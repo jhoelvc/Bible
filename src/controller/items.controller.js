@@ -3,7 +3,7 @@ import { pool } from "../db.js";
 
 export const getItems = async (req, res) => {
 	try {
-	  const [rows] = await pool.query("SELECT * FROM items");
+	  const [rows] = await pool.query("SELECT * FROM item");
 	  res.json(rows);
 	} catch (error) {
 	  return res.status(500).json({ message: "Something goes wrong", error });
@@ -13,7 +13,7 @@ export const getItems = async (req, res) => {
  export const getItem = async (req, res) => {
 	try {
 	  const { code } = req.params;
-	  const [rows] = await pool.query("SELECT * FROM items WHERE code = ?", [
+	  const [rows] = await pool.query("SELECT * FROM item WHERE code = ?", [
 		 code
 	  ]);
  
@@ -30,7 +30,7 @@ export const getItems = async (req, res) => {
  export const deleteItem = async (req, res) => {
 	try {
 	  const { code } = req.params;
-	  const [rows] = await pool.query("DELETE FROM items WHERE code = ?", [code]);
+	  const [rows] = await pool.query("DELETE FROM item WHERE code = ?", [code]);
  
 	  if (rows.affectedRows <= 0) {
 		 return res.status(404).json({ message: "Item not found" });
@@ -46,7 +46,7 @@ export const getItems = async (req, res) => {
 	try {
 	  const { name, price } = req.body;
 	  const [rows] = await pool.query(
-		 "INSERT INTO items (name, price) VALUES (?, ?)",
+		 "INSERT INTO item (name, price) VALUES (?, ?)",
 		 [name, price]
 	  );
 
@@ -62,14 +62,14 @@ export const getItems = async (req, res) => {
 		const { name, price } = req.body;
 		
 		const [result] = await pool.query(
-			"UPDATE items SET name = IFNULL(?, name), price = IFNULL(?, price) WHERE code = ?",
+			"UPDATE item SET name = IFNULL(?, name), price = IFNULL(?, price) WHERE code = ?",
 			[name, price, code]
 		);
 
 		if (result.affectedRows === 0)
 			return res.status(404).json({ message: "Item not found", error });
 
-		const [rows] = await pool.query("SELECT * FROM items WHERE code = ?", [
+		const [rows] = await pool.query("SELECT * FROM item WHERE code = ?", [
 			code,
 		]);
  
