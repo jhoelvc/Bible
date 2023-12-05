@@ -16,3 +16,5 @@ INSERT INTO file_state(code, name) VALUES (1, 'Activo'),
 (3, 'Pendiente'), 
 (4, 'Reservado'), 
 (5, 'Cancelado');
+INSERT INTO person_type(code, name) VALUES (1, 'Cliente'), 
+(2, 'Proveedor');

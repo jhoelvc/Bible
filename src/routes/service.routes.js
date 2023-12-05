@@ -4,7 +4,7 @@ import { getService, getServices, createService, updateService, deleteService } 
 const router = Router()
 
 router.get('/service/:code', getService)
-router.get('/service', getServices)
+router.get('/services/:name/:service_type_code', getServices)
 router.post('/service', createService)
 router.patch('/service/:code', updateService)
 router.delete('/service/:code', deleteService)

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getFileState, getFilesStates, createFileState, updateFileState, deleteFileState } from "../controller/file_state.comtroller.js"
+import { getFileState, getFilesStates, createFileState, updateFileState, deleteFileState } from "../controller/file_state.controller.js"
 
 const router = Router();
 
