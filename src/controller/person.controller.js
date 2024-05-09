@@ -58,7 +58,7 @@ export const createPerson = async (req, res) => {
 	try {
 		const { name, contact_number, identity_document_number, identity_document_type_code, person_type_code } = req.body;
 		const [rows] = await pool.query(
-			"INSERT INTO person (name, contact_number, identity_document_number, identity_document_type_code, person_type_code) VALUES (?, ?, ?, ?)",
+			"INSERT INTO person (name, contact_number, identity_document_number, identity_document_type_code, person_type_code) VALUES (?, ?, ?, ?, ?)",
 			[name, contact_number, identity_document_number, identity_document_type_code, person_type_code]
 		);
 
@@ -76,6 +76,7 @@ export const updatePerson = async (req, res) => {
 		const [result] = await pool.query(
 			`UPDATE person 
 			SET name = IFNULL(?, name), 
+			contact_number = IFNULL(?, contact_number), 
 			identity_document_number = IFNULL(?, identity_document_number), 
 			identity_document_type_code = IFNULL(?, identity_document_type_code),
 			person_type_code = IFNULL(?, person_type_code)

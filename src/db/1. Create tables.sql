@@ -58,7 +58,7 @@ CREATE TABLE person (
     person_type_code TINYINT NOT NULL,
     identity_document_number VARCHAR(15) NOT NULL,
     name VARCHAR(200) NOT NULL,
-    concatc_number VARCHAR(20) NOT NULL,
+    contact_number VARCHAR(20) NOT NULL,
     CONSTRAINT PK_PERSON PRIMARY KEY (code),
     CONSTRAINT FK_IDENTITY_DOCUMENT_TYPE_CODE_PERSON FOREIGN KEY (identity_document_type_code) REFERENCES identity_document_type(code),
     CONSTRAINT FK_PERSON_TYPE_CODE_PERSON FOREIGN KEY (person_type_code) REFERENCES person_type(code)
